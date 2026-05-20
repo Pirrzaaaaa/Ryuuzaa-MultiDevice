@@ -1,20 +1,19 @@
 /**
- * @SCRIPT      🔥 KASHIWADA-BOTWA 🔥
- * @INFO        Script ini GRATIS, bukan untuk dijual belikan.
- * @WARNING     Jangan ngaku-ngaku, jangan jual script gratis, dosa bro 😭
+ * @SCRIPT      🐉 RYUUZAA-MD 🐉
+ * @VERSION     3.0.0
  * 
- * @BASE        NAO-MD
- * @BASE_OWNER  SHIROKAMI RYZEN
+ * @BASE        NAO-MD by SHIROKAMI RYZEN
+ * @UPSTREAM    KASHIWADA-BOTWA by IZUKU-MII
  * 
- * @AUTHOR      IZUKU-MII
- * @REMAKE      IZUKU-MII
+ * @MODIFIED_BY PIRRRZAAAA
+ * @GITHUB      https://github.com/Pirrzaaaaa/Ryuuzaa-MultiDevice
  * 
- * @NOTE        SEMOGA YANG COLONG SCRIPT INI DAPET HIKMAH DAN TOBAT 🙏
- * 
- * @COPYRIGHT   © 2025 IZUKU-MII | All Rights Free.
+ * @CREDITS     Original code by IZUKU-MII | Base by SHIROKAMI RYZEN
+ * @LICENSE     GPL-3.0-or-later
  */
  
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
+// TLS: Only disable in development if needed (uncomment below)
+// process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = 0
 
 import '#library/global.js'
 
@@ -162,7 +161,15 @@ async function connectionUpdate(update) {
     // console.log(JSON.stringify(update, null, 4))
 }
 
-process.on('uncaughtException', console.error)
+// === ANTI-CRASH HANDLERS ===
+process.on('uncaughtException', (err) => {
+    console.error('[UNCAUGHT EXCEPTION]', err.message);
+    console.error(err.stack);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[UNHANDLED REJECTION] at:', promise, 'reason:', reason);
+});
 
 conn.ev.on("connection.update", async (update) => {
     const {
@@ -172,33 +179,39 @@ conn.ev.on("connection.update", async (update) => {
     if (connection === "close") {
         const reason = new Boom(lastDisconnect?.error)?.output.statusCode;
         if (lastDisconnect.error == "Error: Stream Errored (unknown)") {
-            process.exit(0)
+            conn.logger.warn(`Stream error, restarting in 3s...`);
+            setTimeout(() => process.exit(0), 3000);
         } else if (reason === DisconnectReason.badSession) {
-            conn.logger.warn(`Session Anda Buruk Koneksikan Ulang.... Restarting`);
-            process.exit(0)
+            conn.logger.warn(`Bad session, clearing & restarting...`);
+            fs.rmSync("./sessions", { recursive: true, force: true });
+            setTimeout(() => process.exit(0), 2000);
         } else if (reason === DisconnectReason.connectionClosed) {
-            conn.logger.warn(`Koneksi Ini Terputus, Restarting Koneksi Ulang`);
-            process.exit(0)
+            conn.logger.warn(`Connection closed, restarting in 5s...`);
+            setTimeout(() => process.exit(0), 5000);
         } else if (reason === DisconnectReason.connectionLost) {
-            conn.logger.warn(`Koneksi Terputus, Restarting`);
-            process.exit(0)
+            conn.logger.warn(`Connection lost, restarting in 5s...`);
+            setTimeout(() => process.exit(0), 5000);
         } else if (reason === DisconnectReason.connectionReplaced) {
-            conn.logger.error(`Session Udah Di Ganti, Coba Cek Session Kamu Kalo Ganti Atau Logout Pairing Ulang`);
+            conn.logger.error(`Session replaced by another device. Please re-pair.`);
             conn.logout();
         } else if (reason === DisconnectReason.loggedOut) {
-            conn.logger.error(`Pairing Session Anda Logout Segera Pairing Ulang`);
+            conn.logger.error(`Session logged out. Please re-pair.`);
+            fs.rmSync("./sessions", { recursive: true, force: true });
             conn.logout();
         } else if (reason === DisconnectReason.restartRequired) {
-            conn.logger.warn(`Pairing / Qr Terhubung Ngerestart Dulu! `);
-            process.exit(0)
+            conn.logger.warn(`Restart required, restarting...`);
+            setTimeout(() => process.exit(0), 1000);
         } else if (reason === DisconnectReason.timedOut) {
-            conn.logger.warn(`Koneksi Kamu Kena Timeout Menghubungkan Ulang`);
-            process.exit(0)
+            conn.logger.warn(`Connection timed out, restarting in 5s...`);
+            setTimeout(() => process.exit(0), 5000);
+        } else {
+            conn.logger.warn(`Unknown disconnect reason (${reason}), restarting in 5s...`);
+            setTimeout(() => process.exit(0), 5000);
         }
     } else if (connection === "connecting") {
-        conn.logger.info(`Menghubungkan Di Tunggu Proses Nya`);
+        conn.logger.info(`Connecting to WhatsApp...`);
     } else if (connection === "open") {
-        conn.logger.info(`Koneksi Terhubung`);
+        conn.logger.info(`Connected successfully!`);
     }
 });
 
@@ -282,10 +295,9 @@ async function loadingPlugin() {
 
     global.pg = new PluginLoader(process.cwd() + "/plugins");
 
+    await pg.load();
     await pg.watch();
-    setInterval(async () => {
-        await pg.load();
-    }, 2000);
+    // Plugin hot-reload is handled by chokidar in loader.js (event-based, no polling)
 }
 
 loadingPlugin()

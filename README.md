@@ -1,111 +1,100 @@
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Leoojon/dat1/main/uploads/25eb4e-1767859162744.jpg" width="250"/>
+  <img src="https://raw.githubusercontent.com/Leoojon/dat1/main/uploads/25eb4e-1767859162744.jpg" width="200" height="200" alt="Ryuuzaa-MD">
 </p>
 
-<h1 align="center">Kashiwada-MultiDevice - WhatsApp Bot</h1>
+<h1 align="center">Ryuuzaa-MD - WhatsApp Bot</h1>
 
-
----
-
-## 👤 Owner
-
-> GitHub: [izuku-mii](https://github.com/izuku-mii.png)  
-> Project: **Kashiwada-MultiDevice WhatsApp Bot**
-
----
-
-> Bot WhatsApp modular yang kuat menggunakan JavaScript, dibuat dengan sistem plugin untuk fleksibilitas maksimal. Terinspirasi oleh **Kashiwada-san** dari *Kao ni Denai Kashiwada-san to Kao ni Deru Oota-kun*, bot ini menghadirkan semangat dan disiplin dalam obrolan Anda!
+<p align="center">
+  <a href="https://github.com/Pirrzaaaaa/Ryuuzaa-MultiDevice">
+    <img src="https://img.shields.io/github/stars/Pirrzaaaaa/Ryuuzaa-MultiDevice?style=social" alt="Stars">
+  </a>
+  <a href="https://github.com/Pirrzaaaaa/Ryuuzaa-MultiDevice/fork">
+    <img src="https://img.shields.io/github/forks/Pirrzaaaaa/Ryuuzaa-MultiDevice?style=social" alt="Forks">
+  </a>
+</p>
 
 ---
 
-## 📌 Features
+## About
 
-- Arsitektur berbasis plugin
-- Ditulis dalam JavaScript
-- Kompatibel dengan ESModule
-- Pembuatan perintah yang mudah
-- Terinspirasi oleh karakter anime kashiwada
+Bot WhatsApp modular yang powerful menggunakan JavaScript + ESModule, dibangun dengan sistem plugin untuk fleksibilitas maksimal. Menggunakan Baileys Multi-Device library.
 
 ---
 
-## ⚙️ nama database.expired.js ganti ke database.json
+## Features
 
-## 🌐 Example Plugin File
-## 🧠 Example Plugin (No Regex)
+- Multi-device support (tanpa scan QR berulang)
+- Sistem plugin modular (hot-reload)
+- AI Integration (Copilot, Auto-AI)
+- Downloader (YouTube, TikTok, Instagram, Spotify, MediaFire)
+- Sticker creator & converter
+- Group management (welcome, kick, promote, mute)
+- Search tools (Pinterest, GSMArena)
+- Owner tools (eval, exec, plugin manager)
+- Levelling system
+- Anti-crash handler
 
-```javascript
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  // code
-};
+---
 
-handler.command = ['expired', 'exp'];
-handler.help = ['expired', 'exp'];
-handler.tags = ['run'];
-handler.limit = false;
-handler.loading = false;
-handler.mods = false
-handler.rowner = false;
-handler.group = false;
-handler.premium = false;
-handler.admin = false;
-handler.register = false;
-handler.botAdmin = false;
+## Requirements
 
-export default handler;
+- **Node.js** >= 20.x
+- **FFmpeg** (untuk media processing)
+- **ImageMagick** (opsional, untuk sticker)
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/Pirrzaaaaa/Ryuuzaa-MultiDevice.git
+cd Ryuuzaa-MultiDevice
+npm install
+```
+
+### Configuration
+
+Edit `config.json` sesuai kebutuhan:
+- `owner` — nomor WhatsApp owner (format: `628xxx`)
+- `nomor` — nomor WhatsApp bot
+- `pairing` — pairing code untuk koneksi
+- `botname` — nama bot
+- `ownername` — nama owner
+
+Atau gunakan `.env` file (lihat `.env.example`).
+
+### Running
+
+```bash
+npm start
 ```
 
 ---
 
-## ⚡ Example Plugin (With Regex)
+## Environment Variables (Optional)
 
-```javascript
-let handler = async (m, { conn, text, args, usedPrefix, command }) => {
-  // code
-};
+Buat file `.env` untuk menyimpan secrets:
 
-handler.command = /^(expired|exp)$/i;
-handler.help = ['expired', 'exp'];
-handler.tags = ['run'];
-handler.limit = false;
-handler.loading = false;
-handler.mods = false
-handler.rowner = false;
-handler.group = false;
-handler.premium = false;
-handler.admin = false;
-handler.register = false;
-handler.botAdmin = false;
-
-export default handler;
+```env
+GIT_TOKEN=your_github_token_here
+API_KEY_IZUMI=https://api.ootaizumi.web.id
 ```
 
 ---
 
-## 💡 Command Fitur Plugin
+## Credits & Upstream
 
-```Plugin
-.lp - buat liat list plugins
-.sp file/file.js
-.gp file/file.js
-.dp file/file.js
-```
+| Role | Name | Link |
+|------|------|------|
+| **Modified & Maintained by** | Pirrrzaaaa | [GitHub](https://github.com/Pirrzaaaaa) |
+| **Original Script** | IZUKU-MII / Keigo | [Kashiwada-MultiDevice](https://github.com/izuku-mii/Kashiwada-MultiDevice) |
+| **Base Script** | Ryzumi / Shirokami Ryzen | NAO-MD |
+| **WA Library** | @blckrose/baileys | [npm](https://www.npmjs.com/package/@blckrose/baileys) |
 
----
-
-## 💡 Menu Command
-
-```
-.menu       - Show main menu
-.menu all   - Show all commands
-.menu tags  - Show commands by tags
-```
+> This project is a fork/modification of [Kashiwada-MultiDevice](https://github.com/izuku-mii/Kashiwada-MultiDevice) by IZUKU-MII, which is based on NAO-MD by Shirokami Ryzen. All original credits are preserved as required by the license.
 
 ---
 
-### Thx Atau Fungsi Di Script Atau Fitur
-| [![ShirokamiRyzen](https://github.com/ShirokamiRyzen.png?size=100)](https://github.com/ShirokamiRyzen) | [![naruyaizumi](https://github.com/naruyaizumi.png?size=100)](https://github.com/naruyaizumi) | [![AndhikaGG](https://github.com/AndhikaGG.png?size=100)](https://github.com/AndhikaGG) |
-|:--:|:--:|:--:|
-| **[ShirokamiRyzen](https://github.com/ShirokamiRyzen)**<br/>Base Original | **[naruyaizumi](https://github.com/naruyaizumi)**<br/>Fungsi Base / Fungsi Di Script | **[AndhikaGG](https://github.com/AndhikaGG)**<br/>Penyumbang fitur |
+## License
 
-> *"Hmmm...."*
+Licensed under [GPL-3.0-or-later](LICENSE). You are free to modify and redistribute this software under the same license terms, provided original credits remain intact.

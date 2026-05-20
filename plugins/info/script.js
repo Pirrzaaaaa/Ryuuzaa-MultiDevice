@@ -26,7 +26,7 @@ let Izumi = async (m, {
                 name: 'cta_url',
                 buttonParamsJson: JSON.stringify({
                     display_text: 'Script Bot Wa',
-                    url: 'https://github.com/izuku-mii/Kashiwada-MultiDevice'
+                    url: 'https://github.com/Pirrzaaaaa/Ryuuzaa-MultiDevice'
                 })
             }],
             hasMediaAttachment: false // or true
