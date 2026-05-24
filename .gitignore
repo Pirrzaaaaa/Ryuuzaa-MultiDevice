@@ -1,0 +1,73 @@
+# ===================
+# Dependencies
+# ===================
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# ===================
+# WhatsApp Session (PENTING: jangan di-commit!)
+# ===================
+session/
+auth_info_baileys/
+*.creds.json
+pre-key-*.json
+sender-key-*.json
+session-*.json
+app-state-sync-*.json
+
+# ===================
+# Database
+# ===================
+database/*.db
+database/*.db-journal
+database/*.db-wal
+database/*.db-shm
+database/*.sqlite
+database/*.sqlite-journal
+
+# ===================
+# Environment
+# ===================
+.env
+.env.local
+.env.*.local
+
+# ===================
+# Logs
+# ===================
+logs/
+*.log
+npm-debug.log*
+
+# ===================
+# Temp / Cache
+# ===================
+tmp/
+temp/
+*.tmp
+.cache/
+.npm/
+
+# ===================
+# OS
+# ===================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===================
+# IDE / Editor
+# ===================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ===================
+# Misc
+# ===================
+*.tgz
+.eslintcache
